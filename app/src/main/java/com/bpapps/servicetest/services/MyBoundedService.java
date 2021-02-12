@@ -34,6 +34,7 @@ public class MyBoundedService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind: MyBoundedService bind service ");
         return mBinder;
     }
 
@@ -43,6 +44,18 @@ public class MyBoundedService extends Service {
 
         unRegisterOnProgressChangedListener();
         stopSelf();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(TAG, "onUnbind: MyBoundedService  bind service unbind");
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: bounded service finished");
     }
 
     public void startLongRunningTask() {
